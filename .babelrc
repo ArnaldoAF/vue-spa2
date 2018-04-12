@@ -1,11 +1,11 @@
 {
-    "presents": [
+    "presets": [
         [
             "es2015",
             {
                 "modules": false
             }
-        ],
+        ]
     ],
     "ignore": [
         "node_modules/*"
