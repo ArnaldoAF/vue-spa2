@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Category from './theme/Category.vue'
 import Login from './theme/Login.vue'
+// import NotFound from './theme/NotFound.vue'
+
+const NotFound = () => System.import('./theme/NotFound.vue') // <- Lazy loading
 
 Vue.use(VueRouter)
 
@@ -12,8 +15,9 @@ const router = new VueRouter({
   routes: [
     {path: '/login', component: Login},
     // {path: '/category/front-end', component: Category},
-    {path: '/category/:id', component: Category},
-    {path: '/', redirect: '/category/front-end'}]
+    {path: '/category/:id', name: 'category', component: Category},
+    {path: '/', redirect: '/category/front-end'},
+    {path: '*', component: NotFound}]
 })
 
 export default router
