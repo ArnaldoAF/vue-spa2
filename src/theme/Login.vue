@@ -3,7 +3,8 @@
       <h2>Login</h2>
 
       <div v-if="isLogado">
-          Usuario Logado
+          <p>Name: {{profile.firstName}}</p>
+          <p>Favorite Sandwich: {{profile.favoriteSandwich}}</p>
           <button v-on:click="logout()" class="button is-primary">
               LogOut
           </button>
@@ -61,7 +62,20 @@
         return {
           username: '',
           password: '',
-          isLogado: false
+          isLogado: false,
+          profile: {}
+        }
+      },
+      watch: {
+        isLogado: function (val) {
+          if (val) {
+            appService.getProfile()
+              .then(profile => {
+                this.profile = profile
+              })
+          } else {
+            this.profile = {}
+          }
         }
       },
       methods: {
